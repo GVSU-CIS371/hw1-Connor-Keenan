@@ -4,13 +4,22 @@
     <Hot v-else />
     <Contents>
       <template v-slot:top>
-        <Creamer />
+        <!-- Only show creamer if it's not "No Creamer" -->
+        <Creamer 
+          v-if="selectedCreamer !== 'No Creamer'"
+          :selectedCreamer="selectedCreamer"
+          :noSyrup="selectedSyrup === 'No Syrup'"
+        />
       </template>
       <template v-slot:mid>
-        <Syrup />
+        <!-- Only show syrup if it's not "No Syrup" -->
+        <Syrup 
+          v-if="selectedSyrup !== 'No Syrup'"
+          :selectedSyrup="selectedSyrup"
+        />
       </template>
       <template v-slot:bottom>
-        <Base />
+        <Base :selectedBase="selectedBase" />
       </template>
     </Contents>
   </Mug>
@@ -26,6 +35,9 @@ import Cold from "./Cold.vue";
 
 type Props = {
   isIced: boolean;
+  selectedBase?: string;
+  selectedCreamer?: string;
+  selectedSyrup?: string;
 };
 defineProps<Props>();
 </script>
